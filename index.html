@@ -1,73 +1,102 @@
-<!-- index.html -->
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>charity: water — Clean Water Changes Everything</title>
-<link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>charity: water — Clean Water Changes Everything</title>
+  <style>
+    :root{
+      --cw-yellow:#FFC907;
+      --ink:#0a0a0a; --ink-dim:#333; --bg:#FFF7E1; --surface:#fff; --border:#e9e3d3;
+      --radius-lg:22px; --shadow-2:0 10px 30px rgba(0,0,0,.10);
+    }
+    body{margin:0;font-family:Avenir, "Avenir Next", "Proxima Nova", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;line-height:1.6}
+    img{max-width:100%;display:block}
+    a{text-decoration:none;color:inherit}
+    header,section,footer{padding:2rem 1rem}
+    header{background:#fff;border-bottom:1px solid var(--border)}
+    .brand{display:flex;align-items:center;gap:.6rem;font-weight:800}
+    .brand img{height:34px}
+    nav ul{list-style:none;display:flex;gap:1.25rem;justify-content:flex-end;margin:0;padding:0}
+    .btn{display:inline-block;background:var(--cw-yellow);color:#000;padding:.72rem 1.1rem;border-radius:12px;font-weight:700;box-shadow:var(--shadow-2);transition:box-shadow .25s ease, transform .18s ease}
+    .btn:hover{transform:translateY(-2px);box-shadow:0 0 0 10px rgba(255,201,7,.25), var(--shadow-2)}
+    .btn.outline{background:#fff;border:2px solid var(--cw-yellow)}
+    .hero{padding:5rem 1rem;background:linear-gradient(140deg,#fff,var(--bg) 70%)}
+    .hero-grid{display:grid;gap:2rem;align-items:center}
+    .hero h1{font-size:clamp(2rem,4vw+1rem,3rem);margin-bottom:1rem}
+    .hero p{max-width:62ch;color:var(--ink-dim)}
+    .hero-ctas{margin-top:1.5rem;display:flex;gap:1rem;flex-wrap:wrap}
+    .hero-media{aspect-ratio:16/10;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-2);background:#ddd url('images/hero.jpg') center/cover no-repeat}
+    section{padding:4rem 1rem}
+    .section-title{font-size:1.8rem;margin-bottom:1.5rem}
+    .features{display:grid;gap:2rem}
+    .card{background:#fff;border:1px solid var(--border);padding:2rem;border-radius:var(--radius-lg);box-shadow:var(--shadow-2)}
+    .gallery{display:grid;gap:1rem}
+    .tile{aspect-ratio:4/3;border-radius:12px;background:#ddd;background-size:cover;background-position:center;box-shadow:var(--shadow-2)}
+    footer{background:#111;color:#eee;text-align:center;padding:2rem 1rem}
+    @media(min-width:700px){
+      .hero-grid{grid-template-columns:1.2fr 1fr}
+      .features{grid-template-columns:repeat(3,1fr)}
+      .gallery{grid-template-columns:repeat(3,1fr)}
+    }
+  </style>
 </head>
 <body>
-<header>
-<!-- Brand logo and name -->
-<div class="brand">
-  <!-- The logo shows a yellow jerry can, symbolizing clean water, with the words charity: water in lowercase beside it. The design is simple and hopeful, representing the mission to provide clean water globally. -->
-  <img/"cw_logo.png" alt="Yellow jerry can logo next to the words charity: water in lowercase, symbolizing hope and clean water for communities worldwide">
-  <span>charity: water</span>
-</div>
-<nav>
-<ul>
-<li><a href="#about">About</a></li>
-<li><a href="#work">How We Work</a></li>
-<li><a href="#impact">Impact</a></li>
-<li><a href="#donate" class="btn">Donate Today!</a></li>
-</ul>
-</nav>
-</header>
+  <header>
+    <div class="brand"><img src="cw_logo.png" alt="charity: water logo"><span>charity: water</span></div>
+    <nav>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#work">How We Work</a></li>
+        <li><a href="#impact">Impact</a></li>
+        <li><a href="#donate" class="btn">Donate Today!</a></li>
+      </ul>
+    </nav>
+  </header>
 
-<section class="hero" id="home">
-<div class="hero-grid">
-<div>
-<h1>Clean Water Changes Everything.</h1>
-<p>We bring clean and safe drinking water to people in need. Private supporters cover our operating costs so <strong>100% of public donations fund water projects</strong>. See the proof of every project you help fund.</p>
-<div class="hero-ctas">
-<a href="#donate" class="btn">Donate Today!</a>
-<a href="#impact" class="btn outline">See your impact</a>
-</div>
-</div>
-<div class="hero-media"></div>
-</div>
-</section>
+  <section class="hero" id="home">
+    <div class="hero-grid">
+      <div>
+        <h1>Clean Water Changes Everything.</h1>
+        <p>We bring clean and safe drinking water to people in need. Private supporters cover our operating costs so <strong>100% of public donations fund water projects</strong>. See the proof of every project you help fund.</p>
+        <div class="hero-ctas">
+          <a href="#donate" class="btn">Donate Today!</a>
+          <a href="#impact" class="btn outline">See your impact</a>
+        </div>
+      </div>
+      <div class="hero-media"></div>
+    </div>
+  </section>
 
-<section id="work">
-<h2 class="section-title">Why supporters choose charity: water</h2>
-<div class="features">
-<div class="card"><h3>100% model</h3><p>Your gift funds clean water solutions, not overhead.</p></div>
-<div class="card"><h3>Prove it</h3><p>GPS coordinates and updates show the exact projects you supported.</p></div>
-<div class="card"><h3>Sustainable impact</h3><p>Local partners and monitoring keep water flowing.</p></div>
-</div>
-</section>
+  <section id="work">
+    <h2 class="section-title">Why supporters choose charity: water</h2>
+    <div class="features">
+      <div class="card"><h3>100% model</h3><p>Your gift funds clean water solutions, not overhead.</p></div>
+      <div class="card"><h3>Prove it</h3><p>GPS coordinates and updates show the exact projects you supported.</p></div>
+      <div class="card"><h3>Sustainable impact</h3><p>Local partners and monitoring keep water flowing.</p></div>
+    </div>
+  </section>
 
-<section id="impact">
-<h2 class="section-title">Lives changed by clean water</h2>
-<div class="gallery">
-<div class="tile" style="background-image:url('images/gallery-1.jpg')"></div>
-<div class="tile" style="background-image:url('images/gallery-2.jpg')"></div>
-<div class="tile" style="background-image:url('images/gallery-3.jpg')"></div>
-</div>
-</section>
+  <section id="impact">
+    <h2 class="section-title">Lives changed by clean water</h2>
+    <div class="gallery">
+      <div class="tile" style="background-image:url('images/gallery-1.jpg')"></div>
+      <div class="tile" style="background-image:url('images/gallery-2.jpg')"></div>
+      <div class="tile" style="background-image:url('images/gallery-3.jpg')"></div>
+    </div>
+  </section>
 
-<section id="donate">
-<div class="cta-strip">
-<h3>Ready to help bring clean water to more people?</h3>
-<p>Give once or join our monthly giving community to create lasting change.</p>
-<a class="btn" href="https://donate.charitywater.org">Donate Today!</a>
-</div>
-</section>
+  <section id="donate">
+    <div class="cta-strip">
+      <h3>Ready to help bring clean water to more people?</h3>
+      <p>Give once or join our monthly giving community to create lasting change.</p>
+      <a class="btn" href="https://donate.charitywater.org">Donate Today!</a>
+    </div>
+  </section>
 
-<footer>
-<img scr="cw_logo-2.png" alt="charity: water small logo" style="height:26px">
-<div>© 2025 charity: water</div>
-</footer>
+  <footer>
+    <img src="cw_logo-2.png" alt="charity: water small logo" style="height:26px">
+    <div>© 2025 charity: water</div>
+  </footer>
 </body>
 </html>
