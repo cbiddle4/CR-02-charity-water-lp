@@ -7,96 +7,166 @@
   <style>
     :root{
       --cw-yellow:#FFC907;
-      --ink:#0a0a0a; --ink-dim:#333; --bg:#FFF7E1; --surface:#fff; --border:#e9e3d3;
-      --radius-lg:22px; --shadow-2:0 10px 30px rgba(0,0,0,.10);
+      --ink:#0a0a0a; 
+      --ink-dim:#333; 
+      --bg:#FFF7E1; 
+      --surface:#ffffff; 
+      --border:#e9e3d3;
+      --radius-lg:22px; 
+      --shadow-2:0 10px 30px rgba(0,0,0,.10);
+      --container: 1100px;
     }
-    body{margin:0;font-family:Avenir, "Avenir Next", "Proxima Nova", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;line-height:1.6}
-    img scr="img/cw_logo-2.png {max-width:100%;display:block}
-    a{text-decoration:none;color:inherit}
-    header,section,footer{padding:2rem 1rem}
-    header{background:#fff;border-bottom:1px solid var(--border)}
+
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:Avenir, "Avenir Next", "Proxima Nova", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;line-height:1.6;color:var(--ink);background:var(--bg)}
+    img{max-width:100%;display:block;height:auto;border-radius:12px;box-shadow:var(--shadow-2)}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:var(--container);margin:0 auto;padding:0 1rem}
+
+    /* Accessibility */
+    .skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+    .skip-link:focus{left:1rem;top:1rem;width:auto;height:auto;background:#fff;padding:.5rem .75rem;border-radius:10px;box-shadow:var(--shadow-2)}
+    :focus-visible{outline:3px solid var(--cw-yellow);outline-offset:2px}
+
+    header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50}
+    .header-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem 0}
     .brand{display:flex;align-items:center;gap:.6rem;font-weight:800}
-    .brand img{height:34px}
-    nav ul{list-style:none;display:flex;gap:1.25rem;justify-content:flex-end;margin:0;padding:0}
-    .btn{display:inline-block;background:var(--cw-yellow);color:#000;padding:.72rem 1.1rem;border-radius:12px;font-weight:700;box-shadow:var(--shadow-2);transition:box-shadow .25s ease, transform .18s ease}
+    .brand img{height:34px;box-shadow:none;border-radius:0}
+    nav ul{list-style:none;display:flex;gap:1.25rem;align-items:center;margin:0;padding:0}
+    nav a{font-weight:600}
+
+    .btn{display:inline-block;background:var(--cw-yellow);color:#000;padding:.72rem 1.1rem;border-radius:12px;font-weight:800;box-shadow:var(--shadow-2);transition:box-shadow .25s ease, transform .18s ease}
     .btn:hover{transform:translateY(-2px);box-shadow:0 0 0 10px rgba(255,201,7,.25), var(--shadow-2)}
+    .btn:active{transform:translateY(0)}
     .btn.outline{background:#fff;border:2px solid var(--cw-yellow)}
-    .hero{padding:5rem 1rem;background:linear-gradient(140deg,#fff,var(--bg) 70%)}
+    .btn.outline:hover{box-shadow:0 0 0 10px rgba(255,201,7,.25), var(--shadow-2)}
+
+    .hero{padding:5rem 0;background:linear-gradient(140deg,#fff 0%,var(--bg) 70%)}
     .hero-grid{display:grid;gap:2rem;align-items:center}
-    .hero h1{font-size:clamp(2rem,4vw+1rem,3rem);margin-bottom:1rem}
-    .hero p{max-width:62ch;color:var(--ink-dim)}
+    .hero h1{font-size:clamp(2rem,4vw+1rem,3rem);margin:0 0 1rem}
+    .hero p{max-width:62ch;color:var(--ink-dim);margin:0}
     .hero-ctas{margin-top:1.5rem;display:flex;gap:1rem;flex-wrap:wrap}
-    .hero-media{aspect-ratio:16/10;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-2);background:#ddd url('images/hero.jpg') center/cover no-repeat}
-    section{padding:4rem 1rem}
-    .section-title{font-size:1.8rem;margin-bottom:1.5rem}
+    .hero-media img{border-radius:var(--radius-lg);}
+
+    section{padding:4rem 0}
+    .section-title{font-size:1.8rem;margin:0 0 1.5rem;text-align:center}
+
     .features{display:grid;gap:2rem}
-    .card{background:#fff;border:1px solid var(--border);padding:2rem;border-radius:var(--radius-lg);box-shadow:var(--shadow-2)}
+    .card{background:#fff;border:1px solid var(--border);padding:2rem;border-radius:var(--radius-lg);box-shadow:var(--shadow-2);text-align:center}
+    .card h3{margin-top:0}
+
     .gallery{display:grid;gap:1rem}
-    .tile{aspect-ratio:4/3;border-radius:12px;background:#ddd;background-size:cover;background-position:center;box-shadow:var(--shadow-2)}
+    .gallery img{width:100%;height:auto}
+
+    .cta-strip{background:linear-gradient(180deg,#fff,var(--bg));border:1px solid var(--border);border-radius:var(--radius-lg);padding:2rem;box-shadow:var(--shadow-2);text-align:center}
+
     footer{background:#111;color:#eee;text-align:center;padding:2rem 1rem}
+    footer img{box-shadow:none;border-radius:0}
+
+    /* Layout at wider screens */
     @media(min-width:700px){
       .hero-grid{grid-template-columns:1.2fr 1fr}
       .features{grid-template-columns:repeat(3,1fr)}
       .gallery{grid-template-columns:repeat(3,1fr)}
     }
+
+    /* Back-to-top button */
+    #toTop{position:fixed;right:1rem;bottom:1rem;opacity:0;pointer-events:none;transition:opacity .25s, transform .25s;transform:translateY(8px)}
+    #toTop.show{opacity:1;pointer-events:auto;transform:none}
+
+    /* Reduce motion preferences */
+    @media (prefers-reduced-motion: reduce){
+      .btn{transition:none}
+      #toTop{transition:none}
+      html{scroll-behavior:auto}
+    }
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#home">Skip to content</a>
+
   <header>
-    <div class="brand"><img src="cw_logo.png" alt="charity: water logo"><span>charity: water</span></div>
-    <nav>
-      <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#work">How We Work</a></li>
-        <li><a href="#impact">Impact</a></li>
-        <li><a href="#donate" class="btn">Donate Today!</a></li>
-      </ul>
-    </nav>
+    <div class="container header-inner">
+      <div class="brand"><img src="images/cw_logo.png" alt="charity: water logo"><span>charity: water</span></div>
+      <nav aria-label="Primary">
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#work">How We Work</a></li>
+          <li><a href="#impact">Impact</a></li>
+          <li><a href="#donate" class="btn">Donate Today!</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
-  <section class="hero" id="home">
-    <div class="hero-grid">
-      <div>
-        <h1>Clean Water Changes Everything.</h1>
-        <p>We bring clean and safe drinking water to people in need. Private supporters cover our operating costs so <strong>100% of public donations fund water projects</strong>. See the proof of every project you help fund.</p>
-        <div class="hero-ctas">
-          <a href="#donate" class="btn">Donate Today!</a>
-          <a href="#impact" class="btn outline">See your impact</a>
+  <main id="home">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <h1>Clean Water Changes Everything.</h1>
+          <p>We bring clean and safe drinking water to people in need. Private supporters cover our operating costs so <strong>100% of public donations fund water projects</strong>. See the proof of every project you help fund.</p>
+          <div class="hero-ctas">
+            <a href="#donate" class="btn">Donate Today!</a>
+            <a href="#impact" class="btn outline">See your impact</a>
+          </div>
+        </div>
+        <div class="hero-media">
+          <img src="images/hero.jpg" alt="Children enjoying clean water near a new community well">
         </div>
       </div>
-      <div class="hero-media"></div>
-    </div>
-  </section>
+    </section>
 
-  <section id="work">
-    <h2 class="section-title">Why supporters choose charity: water</h2>
-    <div class="features">
-      <div class="card"><h3>100% model</h3><p>Your gift funds clean water solutions, not overhead.</p></div>
-      <div class="card"><h3>Prove it</h3><p>GPS coordinates and updates show the exact projects you supported.</p></div>
-      <div class="card"><h3>Sustainable impact</h3><p>Local partners and monitoring keep water flowing.</p></div>
-    </div>
-  </section>
+    <section id="about">
+      <div class="container">
+        <h2 class="section-title">Why supporters choose charity: water</h2>
+        <div class="features">
+          <article class="card"><h3>100% model</h3><p>Your gift funds clean water solutions, not overhead.</p></article>
+          <article class="card"><h3>Prove it</h3><p>GPS coordinates and updates show the exact projects you supported.</p></article>
+          <article class="card"><h3>Sustainable impact</h3><p>Local partners and monitoring keep water flowing.</p></article>
+        </div>
+      </div>
+    </section>
 
-  <section id="impact">
-    <h2 class="section-title">Lives changed by clean water</h2>
-    <div class="gallery">
-      <div class="tile" style="background-image:url('images/gallery-1.jpg')"></div>
-      <div class="tile" style="background-image:url('images/gallery-2.jpg')"></div>
-      <div class="tile" style="background-image:url('images/gallery-3.jpg')"></div>
-    </div>
-  </section>
+    <section id="impact">
+      <div class="container">
+        <h2 class="section-title">Lives changed by clean water</h2>
+        <div class="gallery" aria-label="Impact photo gallery">
+          <img src="images/gallery-1.jpg" alt="Woman collecting clean water at a pump">
+          <img src="images/gallery-2.jpg" alt="Children smile while washing hands with clean water">
+          <img src="images/gallery-3.jpg" alt="Community celebrating the opening of a new well">
+        </div>
+      </div>
+    </section>
 
-  <section id="donate">
-    <div class="cta-strip">
-      <h3>Ready to help bring clean water to more people?</h3>
-      <p>Give once or join our monthly giving community to create lasting change.</p>
-      <a class="btn" href="https://donate.charitywater.org">Donate Today!</a>
-    </div>
-  </section>
+    <section id="donate">
+      <div class="container">
+        <div class="cta-strip">
+          <h3>Ready to help bring clean water to more people?</h3>
+          <p>Give once or join our monthly giving community to create lasting change.</p>
+          <a class="btn" href="https://donate.charitywater.org" target="_blank" rel="noopener">Donate Today!</a>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer>
-    <img src="cw_logo-2.png" alt="charity: water small logo" style="height:26px">
-    <div>© 2025 charity: water</div>
+    <div class="container" style="display:flex;flex-direction:column;align-items:center;gap:.6rem">
+      <img src="images/cw_logo-2.png" alt="charity: water small logo" style="height:26px">
+      <div>© 2025 charity: water</div>
+    </div>
   </footer>
+
+  <a id="toTop" class="btn" href="#home" aria-label="Back to top">↑ Back to top</a>
+
+  <script>
+    // Back-to-top visibility
+    const toTop = document.getElementById('toTop');
+    const toggleToTop = () => {
+      if (window.scrollY > 500) toTop.classList.add('show');
+      else toTop.classList.remove('show');
+    };
+    toggleToTop();
+    window.addEventListener('scroll', toggleToTop, {passive:true});
+  </script>
 </body>
 </html>
